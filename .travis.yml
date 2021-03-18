@@ -3,22 +3,23 @@ services:
   - docker
 
 before_install:
-  - docker build -t westmantech/react-test -f ./client/Dockerfile.dev ./client
+  - docker build -t alwe9704/react-test -f ./client/Dockerfile.dev ./client
 
 script:
-  - docker run -e CI=true westmantech/react-test npm test
+  - docker run -e CI=true alwe9704/react-test npm test
 
 after_success:
-  - docker build -t westmantech/multi-client ./client
-  - docker build -t westmantech/multi-nginx ./nginx
-  - docker build -t westmantech/multi-server ./server
-  - docker build -t westmantech/multi-worker ./worker
+  - docker build -t alwe9704/multi-client ./client
+  - docker build -t alwe9704/multi-nginx ./nginx
+  - docker build -t alwe9704/multi-server ./server
+  - docker build -t alwe9704/multi-worker ./worker
   #Log in to docker CLI
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+
   #Now we push to DockerHub
-  - docker push westmantech/multi-client
-  - docker push westmantech/multi-nginx
-  - docker push westmantech/multi-server
-  - docker push westmantech/multi-worker 
+  - docker push alwe9704/multi-client
+  - docker push alwe9704/multi-nginx
+  - docker push alwe9704/multi-server
+  - docker push alwe9704/multi-worker 
 
 
